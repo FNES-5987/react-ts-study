@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    // ts 컴파일 후 출력 결과물이 저장되는 위치
+    "outDir": "./dist",
+    // 모듈 방식(es, export/import)
+    "module": "ESNext",
+    // ts 를 js 로 컴파일 한 후 결과 버전
+    "target": "ES2020",
+    // ts에서 사용할 기본 js 라이브러리
+    "lib": ["ESNext", "DOM"],
+    // ts에서 js 코드를 쓸 수 있는지 여부
+    "allowJs": true
+  }
+}
