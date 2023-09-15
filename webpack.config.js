@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 /** @type {import('webpack').Configuration} */
 module.exports = {
    // 시작지점의 코드(여기서부터 번들링이 시작)
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   // entry 부터 시작해서 확장자가 ts/js인 파일들을 번들링하겠다.
   resolve: {
     extensions: [".ts", ".js"],
@@ -24,8 +24,12 @@ module.exports = {
 
   // 번들링이 완료된 코드를 출력하는 위치
   output: {
-    filename: "bundle.js",
+    // 번들링이 완료된 결과물에 대한 설정
+    filename: "js/[name]-[chunkhash].js",
+    // 결과물들의 위치
     path: __dirname + "/dist",
+    // 기존 빌드 결과물 삭제
+    clean: true,
   },
   plugins: [
     // 번들된 파일을 삽입할 HTML 파일을 설정

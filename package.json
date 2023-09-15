@@ -2,7 +2,9 @@
   "scripts": {
     "start": "webpack serve --mode development --port 5000",
     "build": "webpack --mode production",
-    "preview": "serve dist"
+    "preview": "serve dist",
+    "main": "./src/index.js"
+
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.5.3",

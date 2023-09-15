@@ -9,7 +9,7 @@ import { appName, greet, user } from "./module";
 // import module from "./module";
 import metadata from "./module";
 
-const name = "Javascripts!!";
+const name = "Javascripts";
 
 console.log(greet(`${name}-${appName}
 -${metadata.version}-${metadata.creator}
