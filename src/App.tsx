@@ -14,19 +14,23 @@
 
 import react_icon from "./assets/react-icon.png";
 import intro from "./assets/intro.mp4";
+import WelcomeMessage from "./components/WelcomeMessage";
 
 const App = () => {
   // React.createElement(component, props, ...children)
   // React.createElement("div", null, "Hello, React!!")
   return (
     <div>
+      {/* 이미지 사용 */}
       <img src={react_icon} alt="react icon" height={16} />
       <span>Hello, React!!</span>
+      {/* 비디오 사용 */}
       <div>
         <video width={480} height={270} controls loop autoPlay muted>
           <source src={intro} type="video/mp4" />
         </video>
       </div>
+      <WelcomeMessage />
     </div>
   );
 };
