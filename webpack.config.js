@@ -29,6 +29,10 @@ module.exports = {
           target: "es2020", // 지원하는 ECMAScript 버전 설정
         },
       },
+      {
+        test: /\.(gif|jpg|png|webp|svg|mp4)$/,
+        type: "asset/resource",
+      },
     ],
   },
 
@@ -36,6 +40,8 @@ module.exports = {
   output: {
     // 번들링이 완료된 결과물에 대한 설정
     filename: "js/[name]-[chunkhash].js",
+    // 이미지, 동영상 같은 정적파일들의 위치와 파일형식 지원
+    assetModuleFilename: "asset/[hash][ext][query]",
     // 결과물들의 위치
     path: __dirname + "/dist",
     // 기존 빌드 결과물 삭제
@@ -57,6 +63,7 @@ module.exports = {
   // 램(ram)에 파일 디렉터리 형태로 구조를 만들어 저장
   // 램디스크처럼 사용 ./dist/index.html, ./dist/bundle.js
   devServer: {
-    static: "./dist"
+    static: "./dist",
+    open: true,
   },
 };
