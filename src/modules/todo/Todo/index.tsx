@@ -1,5 +1,14 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import TodoModifyModal from "./TodoModifyModal";
+import {
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+// 모듈 가져오기
+// 1차시도: ../TodoModifyModal.ts/tsx/js/jsx
+// 2차시도: ../TodoModifyModal/index.ts/tsx/js/jsx
+import TodoModifyModal from "../TodoModifyModal";
+import { TodoContainer } from "./styles";
 
 interface TodoItem {
   memo: string;
@@ -7,13 +16,20 @@ interface TodoItem {
 
 const Todo = () => {
   // 할일목록 상태(string[])
-  const [todoList, setTodoList] = useState<TodoItem[]>([]);
-  const [showModifyModal, setShowModifyModal] = useState(false);
-  const [modifyItem, setModifyItem] = useState({ index: 0, memo: "" });
+  const [todoList, setTodoList] = useState<
+    TodoItem[]
+  >([]);
+  const [showModifyModal, setShowModifyModal] =
+    useState(false);
+  const [modifyItem, setModifyItem] = useState({
+    index: 0,
+    memo: "",
+  });
   // 입력박스 참조
   // useRef() 참조변수 생성, 기본이 null
   // as MutableRefObject<참조할 변수의 타입>
-  const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const inputRef =
+    useRef() as MutableRefObject<HTMLInputElement>;
 
   // 배열에 추가할 때는
   // 새로운 배열 생성, 기존 배열 나열, 신규 요소 넣음
@@ -37,23 +53,33 @@ const Todo = () => {
     // [...arr]: arr 배열요소를 나열해서 새로운 배열 생성
 
     // filter, map.. 이런형태의 새로운 배열을 반환하는 함수
-    setTodoList([{ memo: input.value }, ...todoList]);
+    setTodoList([
+      { memo: input.value },
+      ...todoList,
+    ]);
     input.value = "";
   };
 
   // 해당 조건에 맞는 요소만 제외된 배열을 만듦
   // filter
   const handleRemove = (index: number) => {
-    setTodoList(todoList.filter((_, idx) => idx !== index));
+    setTodoList(
+      todoList.filter((_, idx) => idx !== index)
+    );
     // setTodoList(todoList.filter((item, idx) => item.id !== id));
   };
 
   // 모달창을 열고 선택한 항목의 데이터를 모달로 넘겨주는 역할
-  const handleOpenModifyModal = (index: number) => {
+  const handleOpenModifyModal = (
+    index: number
+  ) => {
     // 모달 열기
     setShowModifyModal(true);
     // 선택한 데이터 넘겨주기
-    setModifyItem({ index, memo: todoList[index].memo });
+    setModifyItem({
+      index,
+      memo: todoList[index].memo,
+    });
   };
 
   // 수정후 확인 버튼
@@ -89,34 +115,55 @@ const Todo = () => {
   }, [todoList]);
 
   return (
-    <div>
+    <TodoContainer>
       {/* ref 속성에 참조변수 */}
-      <input placeholder="..할일" ref={inputRef}></input>
-      <button onClick={handleAdd}>추가</button>
-      {todoList.length === 0 && <p>할 일 목록이 없습니다.</p>}
+      <header>
+        <input
+          placeholder="..할일"
+          ref={inputRef}
+        ></input>
+        <button onClick={handleAdd}>추가</button>
+      </header>
+      {todoList.length === 0 && (
+        <p>할 일 목록이 없습니다.</p>
+      )}
       {todoList.length > 0 && (
-        <ul>
-          {/* li  */}
-          {/* li  */}
-          {/* li  */}
+        <>
+          <ul>
+            {/* li  */}
+            {/* li  */}
+            {/* li  */}
 
-          {/* string[] => <li>[]  */}
-          {/* 데이터 -> JSX.Element 변경 */}
-          {todoList.map((item, index) => (
-            // key 속성은 엘리먼트 변동여부를 추적할 때 사용하는 속성
-            // key가 변동되면, 엘리먼트를 다시 새로 만듦
-            // 키값을 변동되는 인덱스보다, 유일한 id값을 쓰는게 좋다.
-            <li
-              key={index}
-              onClick={() => {
-                // handleRemove(index);
-                handleOpenModifyModal(index);
-              }}
-            >
-              {item.memo}
-            </li>
-          ))}
-        </ul>
+            {/* string[] => <li>[]  */}
+            {/* 데이터 -> JSX.Element 변경 */}
+            {todoList.map((item, index) => (
+              // key 속성은 엘리먼트 변동여부를 추적할 때 사용하는 속성
+              // key가 변동되면, 엘리먼트를 다시 새로 만듦
+              // 키값을 변동되는 인덱스보다, 유일한 id값을 쓰는게 좋다.
+              <li
+                key={index}
+                onClick={() => {
+                  // handleRemove(index);
+                  handleOpenModifyModal(index);
+                }}
+              >
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemove(index);
+                  }}
+                >
+                  삭제
+                </button>
+                <span>{item.memo}</span>
+              </li>
+            ))}
+          </ul>
+          <footer>
+            <data>{todoList.length}</data> 개의
+            할일
+          </footer>
+        </>
       )}
       {showModifyModal && (
         <TodoModifyModal
@@ -128,7 +175,7 @@ const Todo = () => {
           onCancel={handleModifyModalCancel}
         />
       )}
-    </div>
+    </TodoContainer>
   );
 };
 
