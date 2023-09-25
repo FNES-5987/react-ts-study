@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useContactsData } from "../data";
+import { useState } from "react";
 
 const ContactList = () => {
-  const { contactsData: contacts } =
-    useContactsData();
+  const [page, setPage] = useState(0);
+  // 컴포넌트가 마운팅될때 1번찍히고
+  // contactData를 fetcher로 가져온 다음에 상태가 업데이트 된다음에 1번찍힘
+  // console.log(page);
 
-  console.log(contacts);
+  const { contactsData: contacts } =
+    useContactsData(page);
 
   const navigate = useNavigate();
 
@@ -16,6 +20,13 @@ const ContactList = () => {
   return (
     <div>
       <h3>Contact List</h3>
+      <button
+        onClick={() => {
+          setPage(page + 1);
+        }}
+      >
+        Next
+      </button>
       <ul>
         {contacts.map((c) => (
           <li

@@ -10,21 +10,17 @@ const ContactForm = () => {
   const phoneRef =
     useRef() as MutableRefObject<HTMLInputElement>;
 
-  const { contactsData, mutateContactsData } =
+  const { contactsData, createContactData } =
     useContactsData();
 
   const handleSave = () => {
     // 검증
     // 서버연동
     // 상태값(데이터)변경
-    mutateContactsData([
-      {
-        id: contactsData.length + 1,
-        name: nameRef.current.value,
-        phone: phoneRef.current.value,
-      },
-      ...contactsData,
-    ]);
+    createContactData({
+      name: nameRef.current.value,
+      phone: phoneRef.current.value,
+    });
 
     // 완료가 되면 목록 화면으로 이동
     navigate("/contacts");
