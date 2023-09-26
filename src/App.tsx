@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 // import Todo from "./modules/todo/Todo";
 import Layout from "./Layout";
 import { Suspense, lazy } from "react";
+import PostList from "./modules/post/PostList";
 
 const ContactSidebar = lazy(
   () =>
@@ -61,7 +62,11 @@ const App = () => {
           <Route element={<Home />} index />
           {/* 기능 모듈 */}
           <Route
-            path="/profile/edit"
+            path="posts"
+            element={<PostList />}
+          />
+          <Route
+            path="profile/edit"
             element={<ProfileEdit />}
           />
 

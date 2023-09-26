@@ -8,8 +8,14 @@ const ContactList = () => {
   // contactData를 fetcher로 가져온 다음에 상태가 업데이트 된다음에 1번찍힘
   // console.log(page);
 
-  const { contactsData: contacts } =
-    useContactsData(page);
+  const {
+    contactsData: contacts,
+    isContactDataValidating,
+  } = useContactsData(page);
+
+  // 서버/스토리지의 데이터와 캐시데이터 비교중인지 여부를 표시
+  console.log("---validating---");
+  console.log(isContactDataValidating);
 
   const navigate = useNavigate();
 

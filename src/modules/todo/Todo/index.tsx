@@ -160,6 +160,7 @@ const Todo = () => {
   // useEffect(() => {});
   useEffect(() => {
     (async () => {
+      // setLoading(true)
       try {
         const response = await axios.get<
           TodoItem[]
@@ -171,6 +172,7 @@ const Todo = () => {
       } catch (e: any) {
         console.log(e);
       }
+      // setLoading(false)
     })();
   }, []);
 
