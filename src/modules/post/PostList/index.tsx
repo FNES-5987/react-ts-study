@@ -1,4 +1,4 @@
-import http from "@/utils/htpp";
+import http from "@/utils/http";
 import {
   useEffect,
   useRef,
